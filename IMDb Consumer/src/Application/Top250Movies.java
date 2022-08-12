@@ -1,4 +1,5 @@
 package Application;
+import java.io.PrintWriter;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -48,7 +49,7 @@ public class Top250Movies {
 		
 		
 		//imprimindo os valores obtidos
-		System.out.println("\n TÍTULOS \n");
+		/*System.out.println("\n TÍTULOS \n");
 		titles.forEach(System.out::println);
 		
 		System.out.println("\n IMAGENS \n");
@@ -58,7 +59,7 @@ public class Top250Movies {
 		years.forEach(System.out::println);
 		
 		System.out.println("\n NOTAS \n");
-		ratings.forEach(System.out::println);
+		ratings.forEach(System.out::println);*/
 		
 		List<Movie> moviesList = new ArrayList<>();
 		
@@ -67,7 +68,15 @@ public class Top250Movies {
 			moviesList.add(new Movie(titles.get(i), urlImages.get(i), years.get(i), ratings.get(i)));
 		}
 		
-		moviesList.forEach(System.out::println);
+//		moviesList.forEach(System.out::println);
+		
+		PrintWriter writer = new PrintWriter("index.html");
+		
+		HTMLGenerator html = new HTMLGenerator(writer);
+		html.generate(moviesList);
+		
+		writer.close();
+		System.out.println("html pronto!");
 		
 	}
 	
