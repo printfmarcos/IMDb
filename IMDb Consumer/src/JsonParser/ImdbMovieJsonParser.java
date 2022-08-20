@@ -1,9 +1,12 @@
-package Application;
+package JsonParser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImdbMovieJsonParser {
+import model.Content;
+import model.Movie;
+
+public class ImdbMovieJsonParser implements JsonParser {
 	
 	private String json;
 	
@@ -11,7 +14,7 @@ public class ImdbMovieJsonParser {
 		this.json = json;
 	}
 
-	public List<Movie> parse(){
+	public List<? extends Content> parse(){
 		
 		//pegando cada filme e jogando em um array
 		String[] movies = parseJsonMovies(json);
@@ -35,7 +38,7 @@ public class ImdbMovieJsonParser {
 			moviesList.add(new Movie(titles.get(i), urlImages.get(i), years.get(i), ratings.get(i)));
 		}
 		
-		return moviesList;
+		return (List<? extends Content>) moviesList;
 		
 	}
 

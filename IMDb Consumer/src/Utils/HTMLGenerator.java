@@ -1,8 +1,10 @@
-package Application;
+package Utils;
 
 import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.List;
+
+import model.Content;
 
 public class HTMLGenerator {
 	
@@ -12,7 +14,7 @@ public class HTMLGenerator {
 		this.writer = writer;
 	}
 	
-	public void generate(List<Movie> movies) {
+	public void generate(List<? extends Content> contentList) {
 		
 		String html = """
 				<!DOCTYPE html>
@@ -45,8 +47,8 @@ public class HTMLGenerator {
 				""";
 		
 		//usando o template com os dados do filme			
-		for (Movie movie : movies) {
-			((PrintWriter) writer).print(String.format(divTemplate, movie.getTitle(), movie.getUrlImage(), movie.getTitle(), movie.getRating(), movie.getYear()));
+		for (Content content : contentList) {
+			((PrintWriter) writer).print(String.format(divTemplate, content.title(), content.urlImage(), content.title(), content.rating(), content.year()));
 		}
 		
 		String endHtml = """
